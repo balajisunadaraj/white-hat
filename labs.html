@@ -203,11 +203,11 @@
             setTimeout(() => {
                 const found = Math.random() > 0.5;
                 if (found) {
-                    res.style.background = 'rgba(255, 62, 62, 0.1)';
+                    res.style.background = 'rgba(0, 255, 133, 0.1)';
                     res.innerHTML = `
-                        <i class="fas fa-exclamation-triangle" style="color: var(--danger); font-size: 2rem; margin-bottom: 15px;"></i>
-                        <h4 style="color: var(--danger)">Email Found in 3 Breaches</h4>
-                        <p style="color: var(--text-dim); margin-top: 5px;">Your data was likely leaked in: Adobe (2013), LinkedIn (2016), and a recent marketing leak. Change your passwords immediately!</p>
+                        <i class="fas fa-check-shield" style="color: var(--success); font-size: 2rem; margin-bottom: 15px;"></i>
+                        <h4 style="color: var(--success)">No Known Breaches Found</h4>
+                        <p style="color: var(--text-dim); margin-top: 5px;">We didn't find your email in any major leaked databases. Continue following good security practices!</p>
                     `;
                 } else {
                     res.style.background = 'rgba(0, 255, 133, 0.1)';
@@ -225,4 +225,5 @@
 
 
 </html>
+
 
