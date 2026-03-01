@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Intel | CyberShield</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            padding: 150px 0 60px;
+            background: linear-gradient(to bottom, rgba(5, 6, 10, 1), transparent);
+            text-align: center;
+        }
+
+        .threat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 100px;
+        }
+
+        .threat-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .threat-card:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-primary);
+        }
+
+        .threat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .prevention-list {
+            list-style: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .prevention-list li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-dim);
+        }
+
+        .prevention-list li i {
+            color: var(--success);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fas fa-user-shield"></i>
+            <span>CyberShield</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="attacks.html">Cyber Attacks</a>
+            <a href="labs.html">Security Labs</a>
+            <a href="password.html">Vault</a>
+            <a href="quiz.html">Shield Quiz</a>
+            <a href="contact.html">Report</a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container reveal">
+            <h1>Anatomy of an Attack</h1>
+            <p style="color: var(--text-dim); margin-top: 15px;">Understand your enemies to build your defense. Explore
+                common cyber threats below.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="threat-grid">
+            <!-- Phishing -->
+            <div class="glass-card threat-card reveal">
+                <i class="fas fa-envelope-open-text threat-icon"></i>
+                <h3>Phishing</h3>
+                <p style="color: var(--text-dim);">Fraudulent attempts to obtain sensitive information like usernames,
+                    passwords, and credit card details by disguising as a trustworthy entity.</p>
+                <ul class="prevention-list">
+                    <li><i class="fas fa-check"></i> Check the sender's email address</li>
+                    <li><i class="fas fa-check"></i> Never click suspicious links</li>
+                    <li><i class="fas fa-check"></i> Enable 2-Factor Authentication</li>
+                </ul>
+            </div>
+
+            <!-- Malware -->
+            <div class="glass-card threat-card reveal" style="transition-delay: 0.1s">
+                <i class="fas fa-virus threat-icon"></i>
+                <h3>Malware</h3>
+                <p style="color: var(--text-dim);">Malicious software specifically designed to disrupt, damage, or gain
+                    unauthorized access to a computer system without the user's consent.</p>
+                <ul class="prevention-list">
+                    <li><i class="fas fa-check"></i> Keep software updated</li>
+                    <li><i class="fas fa-check"></i> Use trusted antivirus tools</li>
+                    <li><i class="fas fa-check"></i> Scan all downloaded files</li>
+                </ul>
+            </div>
+
+            <!-- Ransomware -->
+            <div class="glass-card threat-card reveal" style="transition-delay: 0.2s">
+                <i class="fas fa-user-secret threat-icon"></i>
+                <h3>Ransomware</h3>
+                <p style="color: var(--text-dim);">A type of malware that locks and encrypts a victim's data, demanding
+                    a ransom payment to regain access to the files.</p>
+                <ul class="prevention-list">
+                    <li><i class="fas fa-check"></i> Regular off-site backups</li>
+                    <li><i class="fas fa-check"></i> Don't pay the ransom</li>
+                    <li><i class="fas fa-check"></i> Report attacks immediately</li>
+                </ul>
+            </div>
+
+            <!-- SQL Injection -->
+            <div class="glass-card threat-card reveal">
+                <i class="fas fa-database threat-icon"></i>
+                <h3>SQL Injection</h3>
+                <p style="color: var(--text-dim);">A code injection technique where malicious SQL statements are
+                    inserted into entry fields for execution to manipulate back-end databases.</p>
+                <ul class="prevention-list">
+                    <li><i class="fas fa-check"></i> Use prepared statements</li>
+                    <li><i class="fas fa-check"></i> Input validation & sanitization</li>
+                    <li><i class="fas fa-check"></i> Principle of least privilege</li>
+                </ul>
+            </div>
+
+            <!-- MITM -->
+            <div class="glass-card threat-card reveal" style="transition-delay: 0.1s">
+                <i class="fas fa-network-wired threat-icon"></i>
+                <h3>Man-in-the-middle</h3>
+                <p style="color: var(--text-dim);">An attacker secretly relays and possibly alters the communication
+                    between two parties who believe they are directly communicating with each other.</p>
+                <ul class="prevention-list">
+                    <li><i class="fas fa-check"></i> Use encrypted connections (HTTPS)</li>
+                    <li><i class="fas fa-check"></i> Avoid public unsecured Wi-Fi</li>
+                    <li><i class="fas fa-check"></i> Use a reputable VPN</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 CyberShield Awareness Foundation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

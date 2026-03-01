@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield | Your Digital Fortress</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.1) 0%, transparent 70%);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            background: linear-gradient(135deg, #fff 0%, #00f2ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-graphics {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: var(--accent-primary);
+            opacity: 0.1;
+            font-size: 2rem;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .news-card {
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        .news-tag {
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fas fa-user-shield"></i>
+            <span>CyberShield</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="attacks.html">Cyber Attacks</a>
+            <a href="labs.html">Security Labs</a>
+            <a href="password.html">Vault</a>
+            <a href="quiz.html">Shield Quiz</a>
+            <a href="contact.html">Report</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="reveal">Defend Your Digital World.</h1>
+                <p class="reveal" style="transition-delay: 0.2s">CyberShield provides deep insights into modern cyber
+                    threats, offering the tools and knowledge you need to stay safe in an increasingly connected world.
+                </p>
+                <div class="reveal" style="transition-delay: 0.4s">
+                    <a href="attacks.html" class="btn btn-primary">Start Learning</a>
+                    <a href="quiz.html" class="btn"
+                        style="color: var(--text-main); border: 1px solid var(--border); margin-left: 15px;">Test Your
+                        Knowledge</a>
+                </div>
+            </div>
+
+            <div class="hero-graphics">
+                <i class="fas fa-lock floating-icon" style="top: 20%; left: 10%; animation-delay: 0s;"></i>
+                <i class="fas fa-bug floating-icon" style="top: 15%; right: 15%; animation-delay: 1s;"></i>
+                <i class="fas fa-wifi floating-icon" style="bottom: 25%; left: 15%; animation-delay: 2s;"></i>
+                <i class="fas fa-shield-alt floating-icon" style="bottom: 20%; right: 10%; animation-delay: 3s;"></i>
+            </div>
+        </section>
+
+        <section class="section-padding" style="background: rgba(255,255,255,0.02)">
+            <div class="container">
+                <div class="reveal" style="text-align: center; margin-bottom: 50px;">
+                    <h2>Live Threat Intelligence</h2>
+                    <p style="color: var(--text-dim); max-width: 800px; margin: 20px auto;">Real-time feed of latest
+                        cybersecurity incidents and mitigation strategies.</p>
+                </div>
+
+                <div class="news-feed" id="live-news">
+                    <div class="news-item reveal">
+                        <div class="news-date">FEB 25, 2026</div>
+                        <div class="news-info">
+                            <h4 style="color: var(--accent-primary)">Critical Zero-Day in Common Router OS</h4>
+                            <p style="color: var(--text-dim); font-size: 0.9rem;">Security researchers have discovered a
+                                high-severity flaw in multiple router brands. Patching is recommended immediately.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-grid" style="margin-top: 80px;">
+                    <div class="glass-card news-card reveal">
+                        <span class="news-tag">Threat Alert</span>
+                        <h3>Phishing Evolution</h3>
+                        <p style="margin-top: 15px; color: var(--text-dim);">AI-driven phishing campaigns are now
+                            indistinguishable from legitimate communications. Learn how to spot them.</p>
+                    </div>
+                    <div class="glass-card news-card reveal" style="transition-delay: 0.1s">
+                        <span class="news-tag">Data Breach</span>
+                        <h3>Massive Credential Leak</h3>
+                        <p style="margin-top: 15px; color: var(--text-dim);">Recent breaches have exposed millions of
+                            passwords. Use our Vault tool to verify your password strength.</p>
+                    </div>
+                    <div class="glass-card news-card reveal" style="transition-delay: 0.2s">
+                        <span class="news-tag">Secure Tips</span>
+                        <h3>Zero-Trust Architecture</h3>
+                        <p style="margin-top: 15px; color: var(--text-dim);">Never trust, always verify. Simple habits
+                            like 2FA can stop 99% of bulk automated attacks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 CyberShield Awareness Foundation. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Dedicated to teaching digital resilience to the next
+                generation.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

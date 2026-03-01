@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Labs | CyberShield</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fas fa-user-shield"></i>
+            <span>CyberShield</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="attacks.html">Cyber Attacks</a>
+            <a href="labs.html">Security Labs</a>
+            <a href="password.html">Vault</a>
+            <a href="quiz.html">Shield Quiz</a>
+            <a href="contact.html">Report</a>
+        </div>
+    </nav>
+
+    <main class="container reveal" style="margin-top: 150px;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h1>Interactive Security Labs</h1>
+            <p style="color: var(--text-dim); margin-top: 15px;">Hands-on simulations to help you recognize and mitigate
+                modern cyber threats.</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showLab('phishing')">Phishing Demo</button>
+            <button class="tab-btn" onclick="showLab('2fa')">2FA Simulator</button>
+            <button class="tab-btn" onclick="showLab('breach')">Breach Checker</button>
+        </div>
+
+        <!-- Phishing Lab -->
+        <div id="phishing" class="lab-content active glass-card">
+            <div style="margin-bottom: 30px; text-align: center;">
+                <h3>Email Forensics Lab</h3>
+                <p style="color: var(--text-dim); font-size: 0.9rem;">Hover over the <span
+                        style="color: var(--danger)">highlighted flags</span> to learn why this email is suspicious.</p>
+            </div>
+
+            <div class="phishing-email">
+                <div style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                    <strong>From:</strong> <span class="red-flag">Microsoft Account Security
+                        &lt;security@mircosoft-alerts.net&gt;
+                        <span class="flag-tooltip">Notice the spelling: 'mircosoft' instead of 'microsoft'. Legitimate
+                            companies use their verified domains.</span>
+                    </span><br>
+                    <strong>Date:</strong> February 25, 2026<br>
+                    <strong>Subject:</strong> <span class="red-flag">Urgent: Unusual sign-in activity for your account
+                        <span class="flag-tooltip">Fear and urgency are classic phishing tactics to make you act without
+                            thinking.</span>
+                    </span>
+                </div>
+                <div>
+                    <p>Dear Customer,</p><br>
+                    <p>We detected something unusual about a recent sign-in to your Microsoft account. To protect your
+                        data, we have temporarily locked your account.</p><br>
+
+
+                    <p>Please <a href="C:\Antigravity\projects\cyber-shield\test.html" class="red-flag">click here to
+                            verify your identity
+                            <span class="flag-tooltip">Suspicious link! Hovering reveals it points to an unknown IP or
+                                third-party site, not Microsoft.com.</span>
+                            </span> and prevent permanent account deletion.</p><br>
+                    <p>If you don't take action within <span class="red-flag">2 hours
+                            <span class="flag-tooltip">Short deadlines create panic. Real security alerts usually don't
+                                threaten deletion so quickly.</span>
+                        </span>, your data will be unrecoverable.</p><br>
+                    <p>Thank you,<br>The Security Team</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2FA Lab -->
+        <div id="2fa" class="lab-content glass-card">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h3>Two-Factor Authentication Simulator</h3>
+                <p style="color: var(--text-dim);">See why 2FA is the most effective way to stop unauthorized access.
+                </p>
+            </div>
+
+            <div id="login-step" class="auth-box">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Username</label>
+                    <input type="text" value="john_doe_99" readonly style="background: rgba(255,255,255,0.05)">
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Password</label>
+                    <input type="password" value="********" readonly style="background: rgba(255,255,255,0.05)">
+                </div>
+                <button class="btn btn-primary" style="width: 100%" onclick="next2FAStep()">Sign In</button>
+            </div>
+
+            <div id="otp-step" class="auth-box" style="display: none;">
+                <p style="text-align: center; margin-bottom: 20px;">A verification code has been sent to your registered
+                    device. Enter it below:</p>
+                <div class="otp-box" id="otp-inputs">
+                    <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this)">
+                    <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this)">
+                    <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this)">
+                    <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this)">
+                </div>
+                <p style="font-size: 0.8rem; color: var(--accent-primary); text-align: center; margin-bottom: 20px;">
+                    Hint: The code is 1234 (Demo Mode)</p>
+                <button class="btn btn-primary" style="width: 100%" onclick="verifyOTP()">Verify Identity</button>
+            </div>
+
+            <div id="success-step" class="auth-box" style="display: none; text-align: center;">
+                <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--success); margin-bottom: 20px;"></i>
+                <h3>Identity Verified</h3>
+                <p style="color: var(--text-dim); margin-top: 10px;">Even if a hacker knows your password, they can't
+                    get in without this second step.</p>
+                <button class="btn" style="margin-top: 30px; border: 1px solid var(--border); color: #fff"
+                    onclick="reset2FA()">Reset Simulation</button>
+            </div>
+        </div>
+
+        <!-- Breach Lab -->
+        <div id="breach" class="lab-content glass-card">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h3>Data Breach Checker</h3>
+                <p style="color: var(--text-dim);">Verify if your credentials have been leaked in known historical
+                    security breaches.</p>
+            </div>
+
+            <div style="max-width: 500px; margin: 0 auto;">
+                <div style="position: relative; margin-bottom: 30px;">
+                    <input type="email" id="breach-email" placeholder="Enter email to check..."
+                        style="width: 100%; padding: 20px;">
+                    <button class="btn btn-primary"
+                        style="position: absolute; right: 5px; top: 5px; padding: 10px 20px;"
+                        onclick="checkBreach()">Check</button>
+                </div>
+
+                <div id="breach-result" style="display: none; padding: 30px; border-radius: 12px; text-align: center;">
+                    <!-- Results injected here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showLab(labId) {
+            document.querySelectorAll('.lab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(labId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // 2FA Simulator Logic
+        function next2FAStep() {
+            document.getElementById('login-step').style.display = 'none';
+            document.getElementById('otp-step').style.display = 'block';
+        }
+
+        function focusNext(el) {
+            if (el.value.length === 1 && el.nextElementSibling) {
+                el.nextElementSibling.focus();
+            }
+        }
+
+        function verifyOTP() {
+            const inputs = document.querySelectorAll('.otp-digit');
+            let code = "";
+            inputs.forEach(input => code += input.value);
+
+            if (code === "1234") {
+                document.getElementById('otp-step').style.display = 'none';
+                document.getElementById('success-step').style.display = 'block';
+            } else {
+                alert("Invalid code. Try 1234 for the demo!");
+                inputs.forEach(input => input.value = "");
+                inputs[0].focus();
+            }
+        }
+
+        function reset2FA() {
+            document.getElementById('success-step').style.display = 'none';
+            document.getElementById('login-step').style.display = 'block';
+            document.querySelectorAll('.otp-digit').forEach(input => input.value = "");
+        }
+
+        // Breach Checker logic
+        function checkBreach() {
+            const email = document.getElementById('breach-email').value;
+            const res = document.getElementById('breach-result');
+
+            if (!email) return;
+
+            res.style.display = 'block';
+            res.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking global breach databases...';
+            res.style.background = 'rgba(255,255,255,0.03)';
+
+            setTimeout(() => {
+                const found = Math.random() > 0.5;
+                if (found) {
+                    res.style.background = 'rgba(255, 62, 62, 0.1)';
+                    res.innerHTML = `
+                        <i class="fas fa-exclamation-triangle" style="color: var(--danger); font-size: 2rem; margin-bottom: 15px;"></i>
+                        <h4 style="color: var(--danger)">Email Found in 3 Breaches</h4>
+                        <p style="color: var(--text-dim); margin-top: 5px;">Your data was likely leaked in: Adobe (2013), LinkedIn (2016), and a recent marketing leak. Change your passwords immediately!</p>
+                    `;
+                } else {
+                    res.style.background = 'rgba(0, 255, 133, 0.1)';
+                    res.innerHTML = `
+                        <i class="fas fa-check-shield" style="color: var(--success); font-size: 2rem; margin-bottom: 15px;"></i>
+                        <h4 style="color: var(--success)">No Known Breaches Found</h4>
+                        <p style="color: var(--text-dim); margin-top: 5px;">We didn't find your email in any major leaked databases. Continue following good security practices!</p>
+                    `;
+                }
+            }, 1500);
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

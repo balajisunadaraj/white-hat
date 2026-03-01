@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shield Quiz | Test Your Security Knowledge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 150px auto 100px;
+        }
+
+        .q-progress {
+            height: 4px;
+            background: var(--border);
+            margin-bottom: 40px;
+            border-radius: 2px;
+            display: flex;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-primary);
+            transition: width 0.3s ease;
+        }
+
+        .question-box h2 {
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .option:hover {
+            border-color: var(--accent-primary);
+            background: rgba(0, 242, 255, 0.05);
+        }
+
+        .option.selected {
+            border-color: var(--accent-primary);
+            background: rgba(0, 242, 255, 0.1);
+        }
+
+        .results-box {
+            text-align: center;
+            display: none;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border: 5px solid var(--accent-primary);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+        }
+
+        .score-val {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fas fa-user-shield"></i>
+            <span>CyberShield</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="attacks.html">Cyber Attacks</a>
+            <a href="labs.html">Security Labs</a>
+            <a href="password.html">Vault</a>
+            <a href="quiz.html">Shield Quiz</a>
+            <a href="contact.html">Report</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="quiz-container glass-card reveal">
+            <div id="quiz-ui">
+                <div class="q-progress">
+                    <div class="progress-fill" id="progress" style="width: 10%;"></div>
+                </div>
+
+                <div class="question-box">
+                    <span id="q-counter"
+                        style="color: var(--accent-primary); font-weight: 600; font-size: 0.9rem;">QUESTION 1/10</span>
+                    <h2 id="q-text">Loading question...</h2>
+
+                    <div class="options-grid" id="options">
+                        <!-- Options injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-box" id="results-ui">
+                <div class="score-circle">
+                    <span class="score-val" id="final-score">0</span>
+                    <span style="font-size: 0.8rem; color: var(--text-dim)">OUT OF 10</span>
+                </div>
+                <h2 id="result-title">Analyzing...</h2>
+                <p id="result-desc" style="color: var(--text-dim); margin: 20px 0 40px;"></p>
+                <a href="quiz.html" class="btn btn-primary">Try Again</a>
+                <a href="index.html" class="btn" style="color: var(--text-main); margin-left:10px">Home</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const quizData = [
+            { q: "What does 'HTTPS' stand for?", a: ["Hypertext Transfer Protocol Secure", "Home Technical Private System", "High-speed Transfer Protocol Service", "Hidden Track Public Server"], c: 0 },
+            { q: "Which of these is the most secure password feature?", a: ["Using your pet's name", "Using characters like $, #, @", "Using your birth year", "Using '123456'"], c: 1 },
+            { q: "What is Phishing?", a: ["Catching fish online", "A type of database software", "Fraudulent emails meant to steal data", "A way to speed up your Wi-Fi"], c: 2 },
+            { q: "What does 2FA stand for?", a: ["Two File Access", "Two Factor Authentication", "Total Firewall Alarm", "Technical Form Assistant"], c: 1 },
+            { q: "A 'VPN' is primarily used for:", a: ["Making the internet faster", "Checking for viruses", "Encrypting your internet traffic", "Storing large files"], c: 2 },
+            { q: "Common sign of a scam email?", a: ["Professional logos", "Grammar mistakes & urgency", "Personalized greeting", "The correct sender address"], c: 1 },
+            { q: "What should you do after a data breach?", a: ["Nothing, it's too late", "Post about it on social media", "Change passwords & enable 2FA", "Delete your browser history"], c: 2 },
+            { q: "Which is a type of Malware?", a: ["Firewall", "Router", "Ransomware", "Browser"], c: 2 },
+            { q: "What does 'encryption' do?", a: ["Deletes your files", "Scrambles data to make it unreadable", "Speeds up your computer", "Connects you to Wi-Fi"], c: 1 },
+            { q: "Best place to store passwords?", a: ["On a Post-it note", "In your browser autofill", "A trusted Password Manager", "In a 'passwords.txt' file"], c: 2 }
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const data = quizData[currentQ];
+            document.getElementById('q-text').textContent = data.q;
+            document.getElementById('q-counter').textContent = `QUESTION ${currentQ + 1}/10`;
+            document.getElementById('progress').style.width = `${(currentQ + 1) * 10}%`;
+
+            const optionsBox = document.getElementById('options');
+            optionsBox.innerHTML = '';
+
+            data.a.forEach((opt, idx) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.innerHTML = `<i class="far fa-circle"></i> <span>${opt}</span>`;
+                div.onclick = () => selectOption(idx);
+                optionsBox.appendChild(div);
+            });
+        }
+
+        function selectOption(idx) {
+            if (idx === quizData[currentQ].c) score++;
+
+            const options = document.querySelectorAll('.option');
+            options[idx].classList.add('selected');
+            options[idx].querySelector('i').className = 'fas fa-check-circle';
+            options[idx].querySelector('i').style.color = 'var(--accent-primary)';
+
+            setTimeout(() => {
+                currentQ++;
+                if (currentQ < quizData.length) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            }, 500);
+        }
+
+        function showResults() {
+            document.getElementById('quiz-ui').style.display = 'none';
+            const res = document.getElementById('results-ui');
+            res.style.display = 'block';
+            document.getElementById('final-score').textContent = score;
+
+            const title = document.getElementById('result-title');
+            const desc = document.getElementById('result-desc');
+
+            if (score <= 4) {
+                title.textContent = "Script Kiddie";
+                desc.textContent = "You're just starting out! Time to read more about cyber threats on our 'Attacks' page.";
+            } else if (score <= 8) {
+                title.textContent = "Security Guardian";
+                desc.textContent = "Great job! You have a solid grasp of digital safety, but there's still room to sharpen your skills.";
+            } else {
+                title.textContent = "Cyber Sentinel";
+                desc.textContent = "Perfect score! You are a master of digital defense. Keep up the high standards!";
+            }
+        }
+
+        loadQuestion();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

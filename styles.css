@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+    --bg-dark: #05060a;
+    --bg-card: rgba(13, 15, 25, 0.7);
+    --accent-primary: #00f2ff;
+    --accent-secondary: #7000ff;
+    --text-main: #e0e6ed;
+    --text-dim: #94a3b8;
+    --danger: #ff3e3e;
+    --warning: #ffb800;
+    --success: #00ff85;
+    --border: rgba(255, 255, 255, 0.08);
+    --glow: 0 0 20px rgba(0, 242, 255, 0.15);
+    --nav-height: 80px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+.logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+}
+
+/* Global Navigation */
+nav {
+    height: var(--nav-height);
+    background: rgba(5, 6, 10, 0.8);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--accent-primary);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-primary);
+    text-shadow: var(--glow);
+}
+
+/* Layout Utilities */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: 100px 0;
+}
+
+/* UI Elements */
+.btn {
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 242, 255, 0.4);
+}
+
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+/* Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Labs & Interactive Components */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.tab-btn.active {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(0, 242, 255, 0.05);
+}
+
+.lab-content {
+    display: none;
+}
+
+.lab-content.active {
+    display: block;
+}
+
+/* Phishing Demo */
+.phishing-email {
+    background: #fff;
+    color: #333;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.red-flag {
+    color: var(--danger);
+    font-weight: bold;
+    cursor: help;
+    border-bottom: 1px dashed var(--danger);
+    position: relative;
+}
+
+.red-flag::after {
+    content: "🚩 Flag!";
+    font-size: 0.7rem;
+    vertical-align: super;
+}
+
+.flag-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    width: 200px;
+    display: none;
+    z-index: 100;
+}
+
+.red-flag:hover .flag-tooltip {
+    display: block;
+}
+
+/* 2FA Demo */
+.auth-box {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.otp-box {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.otp-digit {
+    width: 50px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #fff;
+    line-height: 60px;
+}
+
+/* News Section */
+.news-feed {
+    margin-top: 40px;
+}
+
+.news-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+}
+
+.news-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.news-date {
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    min-width: 100px;
+}
+
+footer {
+    padding: 50px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
